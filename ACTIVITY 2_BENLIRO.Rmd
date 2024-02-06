@@ -1,0 +1,327 @@
+---
+title: "movie reviews"
+output: html_document
+date: "2024-02-06"
+---
+
+library(rvest)
+library(httr)
+library(dplyr) 
+library(polite)
+
+
+pussnboots_1 <- "https://www.imdb.com/title/tt3915174/reviews?ref_=tt_urv"
+
+session <- bow(pussnboots_1, user_agent = "Educational")
+
+#url 1
+for (url in pussnboots_1){
+  page <- read_html(url)
+  
+  names <- page %>%html_nodes(".display-name-link")%>%html_text()
+  date <- page %>%html_nodes("span.review-date")%>%html_text()
+  rating <- page %>%html_nodes("span.rating-other-user-rating")%>%html_text()
+  reviews <- page %>%html_nodes("a.title")%>%html_text()
+  content <- page %>%html_nodes("div.text.show-more__control")%>%html_text()
+}
+
+pussnboots_df <- data.frame(
+  Name = names[1:25],
+  Date = date [1:25],
+  Rating = rating[1:25],
+  Reviews = reviews[1:25],
+  Content = content[1:25]
+)
+
+pussnboots_df
+
+
+#url 2
+pussnboots_2 <- "https://www.imdb.com/title/tt3915174/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjnzvqltmyars3ikd57xjb7c7yv35pjt6ubktou4vvnjdb4dqjgyyo7ci5i5gce2ur66cibz36"
+
+for (url in pussnboots_2){
+  page <- read_html(url)
+  
+  names2 <- page %>%html_nodes(".display-name-link")%>%html_text()
+  date2 <- page %>%html_nodes("span.review-date")%>%html_text()
+  rating2 <- page %>%html_nodes("span.rating-other-user-rating")%>%html_text()
+  reviews2 <- page %>%html_nodes("a.title")%>%html_text()
+  content2 <- page %>%html_nodes("div.text.show-more__control")%>%html_text()
+}
+
+pussnboots_df2 <- data.frame(
+  Name = names2[1:25],
+  Date = date2 [1:25],
+  Rating = rating2[1:25],
+  Reviews = reviews2[1:25],
+  Content = content2[1:25]
+)
+
+pussnboots_df2
+
+
+#url 3
+pussnboots_3 <- "https://www.imdb.com/title/tt3915174/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjnbqr3rmscj53yndv6hiapdp2wt5pjt6ubksom2fvprcb4d6rdxh3ndafvnhsotfpxb456ijq"
+
+for (url in pussnboots_3){
+  page <- read_html(url)
+  
+  names3 <- page %>%html_nodes(".display-name-link")%>%html_text()
+  date3 <- page %>%html_nodes("span.review-date")%>%html_text()
+  rating3 <- page %>%html_nodes("span.rating-other-user-rating")%>%html_text()
+  reviews3 <- page %>%html_nodes("a.title")%>%html_text()
+  content3 <- page %>%html_nodes("div.text.show-more__control")%>%html_text()
+}
+
+pussnboots_df3 <- data.frame(
+  Name = names3[1:25],
+  Date = date3 [1:25],
+  Rating = rating3 [1:25],
+  Reviews = reviews3 [1:25],
+  Content = content3[1:25]
+)
+
+pussnboots_df3
+
+
+#url 4
+pussnboots_4 <- "https://www.imdb.com/title/tt3915174/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjnjsr3t46ar73akdb6ppa3dpsv35pjt6ubkspayfjmbmb4d7lh2m6yp7xlgo32h6ve56tp7e6"
+
+
+for (url in pussnboots_4){
+  page <- read_html(url)
+  
+  names4 <- page %>%html_nodes(".display-name-link")%>%html_text()
+  date4 <- page %>%html_nodes("span.review-date")%>%html_text()
+  rating4 <- page %>%html_nodes("span.rating-other-user-rating")%>%html_text()
+  reviews4 <- page %>%html_nodes("a.title")%>%html_text()
+  content4 <- page %>%html_nodes("div.text.show-more__control")%>%html_text()
+}
+
+pussnboots_df4 <- data.frame(
+  Name = names4[1:25],
+  Date = date4 [1:25],
+  Rating = rating4 [1:25],
+  Reviews = reviews4 [1:25],
+  Content = content3[1:25]
+)
+
+pussnboots_df4
+
+
+#url 5
+pussnboots_5 <- 'https://www.imdb.com/title/tt3915174/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjmrzr3umuar33yodb7pmb3bpgud5pjt6ubksoe4flmbnb4dsbofscyhfgewd5fyx3hajzwizm'
+
+for (url in pussnboots_5){
+  page <- read_html(url)
+  
+  names5 <- page %>%html_nodes(".display-name-link")%>%html_text()
+  date5 <- page %>%html_nodes("span.review-date")%>%html_text()
+  rating5 <- page %>%html_nodes("span.rating-other-user-rating")%>%html_text()
+  reviews5 <- page %>%html_nodes("a.title")%>%html_text()
+  content5 <- page %>%html_nodes("div.text.show-more__control")%>%html_text()
+}
+
+pussnboots_df5 <- data.frame(
+  Name = names5[1:25],
+  Date = date5 [1:25],
+  Rating = rating5 [1:25],
+  Reviews = reviews5 [1:25],
+  Content = content5[1:25]
+)
+
+pussnboots_df5
+
+#url 6
+pussnboots_6 <- 'https://www.imdb.com/title/tt3915174/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjmrvrxt44cby2imtr7pfaxcpuvd5pjt6ubk4pe2v7njpb4d4j2f7khfgpb7s4cgobbcgaeh32'
+
+for (url in pussnboots_6){
+  page <- read_html(url)
+  
+  names6 <- page %>%html_nodes(".display-name-link")%>%html_text()
+  date6 <- page %>%html_nodes("span.review-date")%>%html_text()
+  rating6 <- page %>%html_nodes("span.rating-other-user-rating")%>%html_text()
+  reviews6 <- page %>%html_nodes("a.title")%>%html_text()
+  content6 <- page %>%html_nodes("div.text.show-more__control")%>%html_text()
+}
+
+pussnboots_df6 <- data.frame(
+  Name = names6[1:25],
+  Date = date6 [1:25],
+  Rating = rating6 [1:25],
+  Reviews = reviews6 [1:25],
+  Content = content6[1:25]
+)
+
+pussnboots_df6
+
+#url 7
+pussnboots_7 <- "https://www.imdb.com/title/tt3915174/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjmrtqlu4wbry2ikdb67jahe76ud5pjt6ubktoyzvtnbjb4d6nuwtg22yxgeg3ad5o3jdkhqbe"
+
+session <- bow(pussnboots_7, user_agent = "Educational")
+session
+
+for (url in pussnboots_7){
+  page <- read_html(url)
+  
+  names7 <- page %>%html_nodes(".display-name-link")%>%html_text()
+  date7 <- page %>%html_nodes("span.review-date")%>%html_text()
+  rating7 <- page %>%html_nodes("span.rating-other-user-rating")%>%html_text()
+  reviews7 <- page %>%html_nodes("a.title")%>%html_text()
+  content7 <- page %>%html_nodes("div.text.show-more__control")%>%html_text()
+}
+
+pussnboots_df7 <- data.frame(
+  Name = names7[1:25],
+  Date = date7 [1:25],
+  Rating = rating7 [1:25],
+  Reviews = reviews7 [1:25],
+  Content = content7[1:25]
+)
+
+pussnboots_df7
+
+
+#url 8
+pussnboots_8 <- 'https://www.imdb.com/title/tt3915174/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjmrqrps4qbz32imdz4hlb7cpgu35pjt6ubczom2vrmzdb4dsv7h5tai24wqjhu6c3o254ux2a'
+
+session <- bow(pussnboots_8, user_agent = "Educational")
+session
+
+for (url in pussnboots_8){
+  page <- read_html(url)
+  
+  names8 <- page %>%html_nodes(".display-name-link")%>%html_text()
+  date8 <- page %>%html_nodes("span.review-date")%>%html_text()
+  rating8 <- page %>%html_nodes("span.rating-other-user-rating")%>%html_text()
+  reviews8 <- page %>%html_nodes("a.title")%>%html_text()
+  content8 <- page %>%html_nodes("div.text.show-more__control")%>%html_text()
+}
+
+pussnboots_df8 <- data.frame(
+  Name = names8[1:25],
+  Date = date8 [1:25],
+  Rating = rating8 [1:25],
+  Reviews = reviews8 [1:25],
+  Content = content8[1:25]
+)
+
+pussnboots_df8
+
+#url 9
+pussnboots_9 <- 'https://www.imdb.com/title/tt3915174/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjmrrrlum4ab33aodd6hfb3bpyudeoq366ssto43vznjcdr4k4axsgle44esrgjvnvcywpucik2y'
+
+session <- bow(pussnboots_9, user_agent = "Educational")
+session
+
+for (url in pussnboots_9){
+  page <- read_html(url)
+  
+  names9 <- page %>%html_nodes(".display-name-link")%>%html_text()
+  date9 <- page %>%html_nodes("span.review-date")%>%html_text()
+  rating9 <- page %>%html_nodes("span.rating-other-user-rating")%>%html_text()
+  reviews9 <- page %>%html_nodes("a.title")%>%html_text()
+  content9 <- page %>%html_nodes("div.text.show-more__control")%>%html_text()
+}
+
+pussnboots_df9 <- data.frame(
+  Name = names9[1:25],
+  Date = date9 [1:25],
+  Rating = rating9 [1:25],
+  Reviews = reviews9 [1:25],
+  Content = content9[1:25]
+)
+
+pussnboots_df9
+
+#url 10
+pussnboots_10 <- 'https://www.imdb.com/title/tt3915174/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjmzzqpsmybzz3upd767mb7ep4vtfoq366ssto44f5nrpdf4k4554up46pyet4ck3ge3n5nr466y'
+
+session <- bow(pussnboots_10, user_agent = "Educational")
+session
+
+for (url in pussnboots_10){
+  page <- read_html(url)
+  
+  names10 <- page %>%html_nodes(".display-name-link")%>%html_text()
+  date10 <- page %>%html_nodes("span.review-date")%>%html_text()
+  rating10 <- page %>%html_nodes("span.rating-other-user-rating")%>%html_text()
+  reviews10 <- page %>%html_nodes("a.title")%>%html_text()
+  content10 <- page %>%html_nodes("div.text.show-more__control")%>%html_text()
+}
+
+pussnboots_df10 <- data.frame(
+  Name = names10[1:25],
+  Date = date10 [1:25],
+  Rating = rating10 [1:25],
+  Reviews = reviews10 [1:25],
+  Content = content10[1:25]
+)
+
+pussnboots_df10
+
+#url11
+pussnboots_11 <- 'https://www.imdb.com/title/tt3915174/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjmzwqpq42aj73amd54hoaha7evl5pjt6ubc3oq2vvnrjb4dxf3udoz6camgz2jq55ru7fs5xw'
+
+session <- bow(pussnboots_11, user_agent = "Educational")
+session
+
+for (url in pussnboots_11){
+  page <- read_html(url)
+  
+  names11 <- page %>%html_nodes(".display-name-link")%>%html_text()
+  date11 <- page %>%html_nodes("span.review-date")%>%html_text()
+  rating11 <- page %>%html_nodes("span.rating-other-user-rating")%>%html_text()
+  reviews11 <- page %>%html_nodes("a.title")%>%html_text()
+  content11 <- page %>%html_nodes("div.text.show-more__control")%>%html_text()
+}
+
+pussnboots_df11 <- data.frame(
+  Name = names11[1:25],
+  Date = date11 [1:25],
+  Rating = rating11 [1:25],
+  Reviews = reviews11 [1:25],
+  Content = content11[1:25]
+)
+
+pussnboots_df11
+
+
+#url12
+pussnboots_12 <- 'https://www.imdb.com/title/tt3915174/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjmzxrxr4mcb63amdb6xiapd72vd5pjt6ubktouzfvmrkb4dslvlvsd5cdrnskibgdjdzq5nqy'
+
+session <- bow(pussnboots_12, user_agent = "Educational")
+session
+
+for (url in pussnboots_12){
+  page <- read_html(url)
+  
+  names12 <- page %>%html_nodes(".display-name-link")%>%html_text()
+  date12 <- page %>%html_nodes("span.review-date")%>%html_text()
+  rating12 <- page %>%html_nodes("span.rating-other-user-rating")%>%html_text()
+  reviews12 <- page %>%html_nodes("a.title")%>%html_text()
+  content12 <- page %>%html_nodes("div.text.show-more__control")%>%html_text()
+}
+
+pussnboots_df12 <- data.frame(
+  Name = names12[1:25],
+  Date = date12 [1:25],
+  Rating = rating12 [1:25],
+  Reviews = reviews12 [1:25],
+  Content = content12[1:25]
+)
+
+pussnboots_df12
+
+ACTIVITY2_BENLIRO <- rbind(pussnboots_df, pussnboots_df2, pussnboots_df3, pussnboots_df4,pussnboots_df5, pussnboots_df6, pussnboots_df7, pussnboots_df8, pussnboots_df9, pussnboots_df10, pussnboots_df11, pussnboots_df12)
+
+ACTIVITY2_BENLIRO <- as.data.frame(ACTIVITY2_BENLIRO)
+
+ACTIVITY2_BENLIRO
+
+
+
+
+
+
+
