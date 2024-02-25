@@ -1,0 +1,471 @@
+---
+title: "movie-reviews-10"
+author: "Rica Marie Benliro"
+date: "2024-02-13"
+output: html_document
+---
+
+library(rvest) 
+library(dplyr) 
+library(writexl) 
+library(polite) 
+
+
+#1. Puss n Boots: The Last Wish
+session <- bow(url = 'https://www.imdb.com/title/tt3915174/reviews?ref_=tt_urv', user_agent = "Student's Demo Educational")
+
+session
+
+session_scrape <- scrape(session) 
+
+scrape_reviews <- function(page_url) { 
+  
+  page <- read_html(page_url) 
+  names <- page %>% html_nodes(".display-name-link") %>% html_text() 
+  dates <- page %>% html_nodes("span.review-date") %>% html_text() 
+  rating <- page %>% html_nodes("span.rating-other-user-rating") %>% html_text() 
+  title_review <- page %>% html_nodes("a.title") %>% html_text() 
+  reviews <- page %>% html_nodes(".text.show-more__control") %>% html_text()
+  
+  pussnboots_review_df = data.frame( 
+    Movie = 'Puss n Boots: The Last Wish',
+    Name = names[1:25], 
+    Date = dates[1:25], 
+    Rating = rating[1:25], 
+    Title_Review = title_review[1:25], 
+    Reviews = reviews[1:25] ) } 
+
+pussnboots_url_list <- c( 'https://www.imdb.com/title/tt3915174/reviews?ref_=tt_urv', 
+                          'https://www.imdb.com/title/tt3915174/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjnzvqltmyars3ikd57xjb7c7yv35pjt6ubktou4vvnjdb4dqjgyyo7ci5i5gce2ur66cibz36',
+                          'https://www.imdb.com/title/tt3915174/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjnbqr3rmscj53yndv6hiapdp2wt5pjt6ubksom2fvprcb4d6rdxh3ndafvnhsotfpxb456ijq',
+                          'https://www.imdb.com/title/tt3915174/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjnjsr3t46ar73akdb6ppa3dpsv35pjt6ubkspayfjmbmb4d7lh2m6yp7xlgo32h6ve56tp7e6',
+                          'https://www.imdb.com/title/tt3915174/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjmrzr3umuar33yodb7pmb3bpgud5pjt6ubksoe4flmbnb4dsbofscyhfgewd5fyx3hajzwizm',
+                          'https://www.imdb.com/title/tt3915174/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjmrvrxt44cby2imtr7pfaxcpuvd5pjt6ubk4pe2v7njpb4d4j2f7khfgpb7s4cgobbcgaeh32',
+                          'https://www.imdb.com/title/tt3915174/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjmrtqlu4wbry2ikdb67jahe76ud5pjt6ubktoyzvtnbjb4d6nuwtg22yxgeg3ad5o3jdkhqbe',
+                          'https://www.imdb.com/title/tt3915174/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjmrqrps4qbz32imdz4hlb7cpgu35pjt6ubczom2vrmzdb4dsv7h5tai24wqjhu6c3o254ux2a', 
+                          'https://www.imdb.com/title/tt3915174/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjmrrrlum4ab33aodd6hfb3bpyudeoq366ssto43vznjcdr4k4axsgle44esrgjvnvcywpucik2y', 
+                          'https://www.imdb.com/title/tt3915174/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjmzzqpsmybzz3upd767mb7ep4vtfoq366ssto44f5nrpdf4k4554up46pyet4ck3ge3n5nr466y',
+                          'https://www.imdb.com/title/tt3915174/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjmzwqpq42aj73amd54hoaha7evl5pjt6ubc3oq2vvnrjb4dxf3udoz6camgz2jq55ru7fs5xw',
+                          'https://www.imdb.com/title/tt3915174/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjmzxrxr4mcb63amdb6xiapd72vd5pjt6ubktouzfvmrkb4dslvlvsd5cdrnskibgdjdzq5nqy' )
+
+
+all_reviews <- lapply(pussnboots_url_list, scrape_reviews) 
+pussnboots_reviews <- do.call(rbind, all_reviews) 
+View(pussnboots_reviews) 
+
+
+
+#2. Saltburn
+session2 <- bow(url = 'https://www.imdb.com/title/tt17351924/reviews?ref_=tt_urv', user_agent = "Student's Demo Educational")
+
+session2
+
+session_scrape2 <- scrape(session2) 
+
+scrape_reviews2 <- function(page_url) { 
+  
+  page <- read_html(page_url) 
+  names <- page %>% html_nodes(".display-name-link") %>% html_text() 
+  dates <- page %>% html_nodes("span.review-date") %>% html_text() 
+  rating <- page %>% html_nodes("span.rating-other-user-rating") %>% html_text() 
+  title_review <- page %>% html_nodes("a.title") %>% html_text() 
+  reviews <- page %>% html_nodes(".text.show-more__control") %>% html_text()
+  
+  saltburn_review_df = data.frame( 
+    Movie = 'Saltburn',
+    Name = names[1:25], 
+    Date = dates[1:25], 
+    Rating = rating[1:25], 
+    Title_Review = title_review[1:25], 
+    Reviews = reviews[1:25] ) } 
+
+saltburn_url_list <- c( 'https://www.imdb.com/title/tt17351924/reviews?ref_=tt_urv',
+                          'https://www.imdb.com/title/tt17351924/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjnrvrxq4oab62motb77faxcpuul5pjt6ubc7ouzfjnrcb4d23i275p2px3kvhogku35tid4c4',
+                          'https://www.imdb.com/title/tt17351924/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjnztrdr4uajz3mpdx77la7dpww35pjt6ubc6pe4vvprlb4dztfta4ew64mpjq5d4zkld4tvao',
+                          'https://www.imdb.com/title/tt17351924/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjnbwrlq46ajt3mpdr7hja7c7yul5pjt6ubc6oq2v7prnb4dzgei3zia4ibcxsk3ycjgo5fvco',
+                          'https://www.imdb.com/title/tt17351924/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjnbqrhqmqcb434nd37hia7b76w35pjt6ubc6oeyvtnjob4dtxb2zl77wgkbj2twtwx2dkoeow',
+                          'https://www.imdb.com/title/tt17351924/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjnjyqps4yab33upd377fa3cp2v3hoq366sssou2vtpzmcr4k52m4krzo4hmop55lb2cyr6qez6y',
+                          'https://www.imdb.com/title/tt17351924/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjnjzqlumybr52mmd36xpale7sutfoq366sssoq2v5mjncv4k425zel3hpn2ny2eadmyfgwmw55y',
+                          'https://www.imdb.com/title/tt17351924/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjnjwrlum2bjy3aptb7xpatc72ul5pjt6ubc6om3fxmjcb4dv3t7z3svojobkx6uhnp2dmajlq',
+                          'https://www.imdb.com/title/tt17351924/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjnjvrds4wazt2iodr4platd7wud5pjt6ubc6ou2f3nrlb4dywe5aag3a3vlqczb5ppkmb7cng',
+                          'https://www.imdb.com/title/tt17351924/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjnjqqps46az63iotz6hjahdpeul5pjt6ubc6oi3fvnblb4dzuxef22zunrtef6ljhyqbd3tyk',
+                          'https://www.imdb.com/title/tt17351924/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjmryqpqmmajy3andt7hlapep4udgoq366sssouyfxmrnd54k4x5mkj7xdxka5qrc2odjv6sfhni',
+                          'https://www.imdb.com/title/tt17351924/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjmrzrhq42bbs3mpt36hfb3a7ev35pjt6ubc6oq2flnblb4d4kr34jmkf2c23spfcrkgzbgly4' )
+
+
+all_reviews2 <- lapply(saltburn_url_list, scrape_reviews2) 
+saltburn_reviews <- do.call(rbind, all_reviews2) 
+View(saltburn_reviews) 
+
+
+
+
+#3. Phantom Thread
+session3 <- bow(url = 'https://www.imdb.com/title/tt5776858/reviews?ref_=tt_urv', user_agent = "Student's Demo Educational")
+
+session3
+
+session_scrape3 <- scrape(session3) 
+
+scrape_reviews3 <- function(page_url) { 
+  
+  page <- read_html(page_url) 
+  names <- page %>% html_nodes(".display-name-link") %>% html_text() 
+  dates <- page %>% html_nodes("span.review-date") %>% html_text() 
+  rating <- page %>% html_nodes("span.rating-other-user-rating") %>% html_text() 
+  title_review <- page %>% html_nodes("a.title") %>% html_text() 
+  reviews <- page %>% html_nodes(".text.show-more__control") %>% html_text()
+  
+  phantomthread_review_df = data.frame( 
+    Movie = 'Phantom Thread',
+    Name = names[1:25], 
+    Date = dates[1:25], 
+    Rating = rating[1:25], 
+    Title_Review = title_review[1:25], 
+    Reviews = reviews[1:25] ) } 
+
+phantomthread_url_list <- c(  'https://www.imdb.com/title/tt5776858/reviews?ref_=tt_urv', 
+                         'https://www.imdb.com/title/tt5776858/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjnbzr3smmarz3untz77ja7e76ul5pjt6uck3oy2flmbkb4drqe7eauirauwzu6tuj5e66m7w4', 
+                         'https://www.imdb.com/title/tt5776858/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjnbqr3t4ycjt3qntr67oa3cpswt5pjt6uck3oqyvzpzmb4dv45p2bxrmnmi7cck7irr2f6g7a', 
+                         'https://www.imdb.com/title/tt5776858/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjnjzqpsmscb23uodz77mahe7yud5pjt6uck3ouzvvmrmb4drw6hpzzfztpbb4iikbixebuuee', 
+                         'https://www.imdb.com/title/tt5776858/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjnjvrtrmmbr43qmtd4pna3cp6wtgoq366ss7oazflmzndz4k5epqjcoyl7vktfdwv2nu33yen3a', 
+                         'https://www.imdb.com/title/tt5776858/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjnjtrdumsab53qkdx7xka3ap4u3hoq366ss7oq3fjmrndb4k4nfwahglutgs7qashqqmk4lo5gi', 
+                         'https://www.imdb.com/title/tt5776858/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjmryqlrmscj52mkdd4pkapb7uv35pjt6uck3ou3f5mrkb4dtpvhsngxfge7gellu7f2exsvvi', 
+                         'https://www.imdb.com/title/tt5776858/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjmrwqlrmsaj43aktx4peb3dpeutcoq366ss5oqyfxnjpdb4k5p5gerkiyfmxpierahjkb7wvnea', 
+                         'https://www.imdb.com/title/tt5776858/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjmruqpsmoaby2indz77jb3dpsulfoq366ss6oe3frnbcdv4k4vh4rilnktlx4nqyxqrtxc2y5jy', 
+                         'https://www.imdb.com/title/tt5776858/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjmrvrdu44az73upd367katbp6wt5pjt6uck3om3fvmbkb4dzdbxuphe3kofhxbq4byufobvvw', 
+                         'https://www.imdb.com/title/tt5776858/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjmrtrdumsab53qkdx7xka3ap4ud5pjt6uck6o4yf7mzpb4dzucrujymlaha7bzj4gyc7ukaas', 
+                         'https://www.imdb.com/title/tt5776858/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjmrrqlqm6cby3imdr6xiatapetttfjrksdc7ou2fjnjyobsrabk2zuop4qoyow2bxy7txfja' )
+
+
+all_reviews3 <- lapply(phantomthread_url_list, scrape_reviews3) 
+phantomthread_reviews <- do.call(rbind, all_reviews3) 
+View(phantomthread_reviews)
+
+
+
+#4. The Meg
+session4 <- bow(url =  'https://www.imdb.com/title/tt9224104/reviews/?ref_=tt_ov_rt', user_agent = "Student's Demo Educational")
+
+session4
+
+session_scrape4 <- scrape(session4) 
+
+scrape_reviews4 <- function(page_url) { 
+  
+  page <- read_html(page_url) 
+  names <- page %>% html_nodes(".display-name-link") %>% html_text() 
+  dates <- page %>% html_nodes("span.review-date") %>% html_text() 
+  rating <- page %>% html_nodes("span.rating-other-user-rating") %>% html_text() 
+  title_review <- page %>% html_nodes("a.title") %>% html_text() 
+  reviews <- page %>% html_nodes(".text.show-more__control") %>% html_text()
+  
+  themeg_review_df = data.frame( 
+    Movie = 'The Meg',
+    Name = names[1:25], 
+    Date = dates[1:25], 
+    Rating = rating[1:25], 
+    Title_Review = title_review[1:25], 
+    Reviews = reviews[1:25] ) } 
+
+themeg_url_list <- c(  'https://www.imdb.com/title/tt5776858/reviews?ref_=tt_urv', 
+                              'https://www.imdb.com/title/tt5776858/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjnbzr3smmarz3untz77ja7e76ul5pjt6uck3oy2flmbkb4drqe7eauirauwzu6tuj5e66m7w4', 
+                              'https://www.imdb.com/title/tt5776858/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjnbqr3t4ycjt3qntr67oa3cpswt5pjt6uck3oqyvzpzmb4dv45p2bxrmnmi7cck7irr2f6g7a', 
+                              'https://www.imdb.com/title/tt5776858/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjnjzqpsmscb23uodz77mahe7yud5pjt6uck3ouzvvmrmb4drw6hpzzfztpbb4iikbixebuuee', 
+                              'https://www.imdb.com/title/tt5776858/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjnjvrtrmmbr43qmtd4pna3cp6wtgoq366ss7oazflmzndz4k5epqjcoyl7vktfdwv2nu33yen3a', 
+                              'https://www.imdb.com/title/tt5776858/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjnjtrdumsab53qkdx7xka3ap4u3hoq366ss7oq3fjmrndb4k4nfwahglutgs7qashqqmk4lo5gi', 
+                              'https://www.imdb.com/title/tt5776858/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjmryqlrmscj52mkdd4pkapb7uv35pjt6uck3ou3f5mrkb4dtpvhsngxfge7gellu7f2exsvvi', 
+                              'https://www.imdb.com/title/tt5776858/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjmrwqlrmsaj43aktx4peb3dpeutcoq366ss5oqyfxnjpdb4k5p5gerkiyfmxpierahjkb7wvnea', 
+                              'https://www.imdb.com/title/tt5776858/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjmruqpsmoaby2indz77jb3dpsulfoq366ss6oe3frnbcdv4k4vh4rilnktlx4nqyxqrtxc2y5jy', 
+                              'https://www.imdb.com/title/tt5776858/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjmrvrdu44az73upd367katbp6wt5pjt6uck3om3fvmbkb4dzdbxuphe3kofhxbq4byufobvvw', 
+                              'https://www.imdb.com/title/tt5776858/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjmrtrdumsab53qkdx7xka3ap4ud5pjt6uck6o4yf7mzpb4dzucrujymlaha7bzj4gyc7ukaas', 
+                              'https://www.imdb.com/title/tt5776858/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjmrrqlqm6cby3imdr6xiatapetttfjrksdc7ou2fjnjyobsrabk2zuop4qoyow2bxy7txfja' )
+
+
+all_reviews4 <- lapply(themeg_url_list, scrape_reviews4) 
+themeg_reviews <- do.call(rbind, all_reviews4) 
+View(themeg_reviews)
+
+
+
+
+#5. Maleficent
+session5 <- bow(url =  'https://www.imdb.com/title/tt1587310/reviews?ref_=tt_urv', user_agent = "Student's Demo Educational")
+
+session5
+
+session_scrape5 <- scrape(session5) 
+
+scrape_reviews5 <- function(page_url) { 
+  
+  page <- read_html(page_url) 
+  names <- page %>% html_nodes(".display-name-link") %>% html_text() 
+  dates <- page %>% html_nodes("span.review-date") %>% html_text() 
+  rating <- page %>% html_nodes("span.rating-other-user-rating") %>% html_text() 
+  title_review <- page %>% html_nodes("a.title") %>% html_text() 
+  reviews <- page %>% html_nodes(".text.show-more__control") %>% html_text()
+  
+  maleficent_review_df = data.frame( 
+    Movie = 'Maleficent',
+    Name = names[1:25], 
+    Date = dates[1:25], 
+    Rating = rating[1:25], 
+    Title_Review = title_review[1:25], 
+    Reviews = reviews[1:25] ) } 
+
+malefincent_url_list <- c('https://www.imdb.com/title/tt1587310/reviews?ref_=tt_urv',
+                          'https://www.imdb.com/title/tt1587310/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjnbyr7rmwars2ipd74hia3c74vl5pjt6uds3oi2fjnzdb4d2aqn32w7ejqtt7wcrryenozvwo',
+                          'https://www.imdb.com/title/tt1587310/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjnbtr7rm4cj63mnt367jahapyul5pjt6uds3o4yv7mbob4dzspzcmfni2zniiqpj5pxlpmbpy',
+                          'https://www.imdb.com/title/tt1587310/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjnjyrtumqcbs2iktv7pjb3d7evd5pjt6uds3pe3vrnjmb4dvmrmmz6o3u7z5izckiqg7jkbhq',
+                          'https://www.imdb.com/title/tt1587310/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjnjwrdr4wcjs3aptx4ppada7svd5pjt6ubc7oy4v3mrkb4d5k4ddmscfgiunqbgsp7e4sobew',
+                          'https://www.imdb.com/title/tt1587310/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjnjurdqm2aj72iod767madc7gvt5pjt6uds3oi2fxprdb4dwllgtuzkm4rzdqpcanspnqloeo',
+                          'https://www.imdb.com/title/tt1587310/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjnjtrhs4ubr43ukt77pnb3a7uv35pjt6uck3oizvznjpb4dvdwqcf3z5atgzgrfsbgazds2a6',
+                          'https://www.imdb.com/title/tt1587310/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjnjrrxrmobj73ymdb4hnb7d7stttfjrksds7pe2fzpzyoaa3ybi35wqmuzddaba6cyld7gzq',
+                          'https://www.imdb.com/title/tt1587310/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjmryrpt42br734md37xfa3d72u35pjt6uds3oi2vjnzpb4dsvideylys5krsjrtkcl46w4pse',
+                          'https://www.imdb.com/title/tt1587310/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjmrwrtumwars3emd57xjb3bpgtttfjrk4dkyoiyflnbyoaokxtptzz6erj657tmgaxyvjbnq',
+                          'https://www.imdb.com/title/tt1587310/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjmrxrhtmmar53uktz6peadepwv35pjt6uc2toi4vlnrjb4dyb36zq5c3o2gh57wsz25ypux46',
+                          'https://www.imdb.com/title/tt1587310/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjmrvrxumwbr23qmd54piaxe7gwt5pjt6ucc5oiyv7nbnb4d44txpytpa7fqsjndjl2aboazjk')
+
+
+all_reviews5 <- lapply(malefincent_url_list, scrape_reviews5) 
+maleficent_reviews <- do.call(rbind, all_reviews5) 
+View(maleficent_reviews)
+
+
+#6.  Smith
+
+session6 <- bow(url ='https://www.imdb.com/title/tt14044212/reviews?ref_=tt_urv', user_agent = "Student's Demo Educational")
+
+session6
+
+session_scrape6 <- scrape(session6) 
+
+scrape_reviews6 <- function(page_url) { 
+  
+  page <- read_html(page_url) 
+  names <- page %>% html_nodes(".display-name-link") %>% html_text() 
+  dates <- page %>% html_nodes("span.review-date") %>% html_text() 
+  rating <- page %>% html_nodes("span.rating-other-user-rating") %>% html_text() 
+  title_review <- page %>% html_nodes("a.title") %>% html_text() 
+  reviews <- page %>% html_nodes(".text.show-more__control") %>% html_text()
+  
+  smith_review_df = data.frame( 
+    Movie = 'Divergent',
+    Name = names[1:25], 
+    Date = dates[1:25], 
+    Rating = rating[1:25], 
+    Title_Review = title_review[1:25], 
+    Reviews = reviews[1:25] ) 
+    
+  } 
+
+smith_url_list <- c("https://www.imdb.com/title/tt14044212/reviews?ref_=tt_urv",
+"https://www.imdb.com/title/tt3915174/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjnzuqprmycjt3undt7xjb3a76vd5pjt6ubc5oa2f3njpb4duinr3vueouuvgcbkjxmyjngjgw",
+ "https://www.imdb.com/title/tt3915174/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjnzrr3s44br73iktz7xeb7bpyvt5pjt6ubc5oazfxmznb4drrotbjkf33jfi4lzg5naguahyq",
+ "https://www.imdb.com/title/tt3915174/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjnbwrxsm2ab43eodb6xpb3epwwt5pjt6ubc5oazfrmzob4d5hcmz6ffqqx5t2yspc3yjqfsis",
+  "https://www.imdb.com/title/tt3915174/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjnbvrhqmwbbt2mmtd6hnb7b6mqbdf4wkwdk3oyzfxjchqris3ayvw5z4lpkpbrinieaipe",
+  "https://www.imdb.com/title/tt3915174/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjnbrrxt4sbr43yptb67paxd7gwt5pjt6ubc5oazf3nbob4d7ilkhqecoqftsuitxpvjmfk2sk",
+  "https://www.imdb.com/title/tt3915174/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjnjxqpq4mbb23updv6pmate7svtcoq366sssoyyvrpzpdj4k5uf6bvcle2ew3lckalrf4hp7fma",
+  "https://www.imdb.com/title/tt3915174/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjnjsqlqmscb73ent37xoahbpyvl5pjt6ubc5oa4v5pzib4dt6kyxrwpvgt3wt46n6dripxrsu",
+  "https://www.imdb.com/title/tt3915174/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjnjqrpsmoazy3uktt7xoa7b7uvdfoq366sssoyyf5nrndn4k4e3yldqfoza5lwzalfnhonbdl7y",
+   "https://www.imdb.com/title/tt3915174/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjmrwqpu42cjy2mpt567la7b7ywt5pjt6ubc5oayf5njnb4du6yajes5tvxte3wlnf4rtcnypq",
+    "https://www.imdb.com/title/tt3915174/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjmrurtu4sbjs2int77hla3d7gvteoq366sssoyyv7mbpdr4k5cj4dlziy73uk2j3gtd644m74hy",
+    "https://www.imdb.com/title/tt3915174/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjmrqrhrmucjy3uot76pmaxa7qwt5pjt6ubc5oeyfrmbmb4d4zuguotqkki3qekc6awdzqe3a4"
+
+  )
+
+all_reviews6 <- lapply(smith_url_list, scrape_reviews6) 
+smith_reviews <- do.call(rbind, all_reviews6) 
+View(smith_reviews)
+
+
+
+#7.  Divergent
+
+session7 <- bow(url ='https://www.imdb.com/title/tt1840309/reviews?ref_=tt_urv', user_agent = "Student's Demo Educational")
+
+session7
+
+session_scrape7 <- scrape(session7) 
+
+scrape_reviews7 <- function(page_url) { 
+  
+  page <- read_html(page_url) 
+  names <- page %>% html_nodes(".display-name-link") %>% html_text() 
+  dates <- page %>% html_nodes("span.review-date") %>% html_text() 
+  rating <- page %>% html_nodes("span.rating-other-user-rating") %>% html_text() 
+  title_review <- page %>% html_nodes("a.title") %>% html_text() 
+  reviews <- page %>% html_nodes(".text.show-more__control") %>% html_text()
+  
+  divergent_review_df = data.frame( 
+    Movie = 'Divergent',
+    Name = names[1:25], 
+    Date = dates[1:25], 
+    Rating = rating[1:25], 
+    Title_Review = title_review[1:25], 
+    Reviews = reviews[1:25] ) 
+    
+  } 
+
+divergent_url_list <- c('https://www.imdb.com/title/tt1840309/reviews?ref_=tt_urv',
+"https://www.imdb.com/title/tt1840309/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjnzsrdr4yazt2mpd56pmahbp4u35pjt6ud2spa2f3prnb4d7e3osoxxfdmtwrp2ryrw4irkbo",
+ "https://www.imdb.com/title/tt1840309/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjnbzrhq4sbzs3amdb4hladepyud5pjt6ud2spa2v5pzkb4dv5yoq7lp4ozslytq5dteuvb4iy",
+ "https://www.imdb.com/title/tt1840309/reviews/_ajax?&paginationKeyg4w6ddbmqyzdo6ic4oxwjnbsrxsm6bb23ekd56xia3cpgw35pjt6uds6oqyftmrnb4d7njkmardrvodbdqqfz2qgxu6g6",
+  "https://www.imdb.com/title/tt1840309/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjnbqrtrmqbz23emtv7pnaxbpgv35pjt6ud2spe2flmrjb4dwnwnsvygibe6ss632l7rzivdhm",
+  "https://www.imdb.com/title/tt1840309/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjnbrrlr4wbj22ipd377mapd7uul5pjt6uds5o42f5mrlb4d7nobd4yz6dwui2p366g5ox3u3o",
+  "https://www.imdb.com/title/tt1840309/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjnjwrhum2cb23mktb77iapc7ywt5pjt6uds3oeyv7nrnb4d2czpmmpywn4vpnkp4ztp76atay",
+  "https://www.imdb.com/title/tt1840309/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjnjwrhum2cb23mktb77iapc7ywt5pjt6uds3oeyv7nrnb4d2czpmmpywn4vpnkp4ztp76atay",
+  "https://www.imdb.com/title/tt1840309/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjnjur7rmsaj53endd77mb7cp4wtfoq366ssyoa4v3nrdd54k5mvdeqgvrjrzrud7pau6saqfupy",
+   "https://www.imdb.com/title/tt1840309/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjnjsrxq42ars3ymtz67ja3d74u35pjt6ud2spa2vjnzmb4dzi7jqgktztn3qca3hgorchquxy",
+    "https://www.imdb.com/title/tt1840309/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjnjqrtum4br33eod76pka7cpwwt5pjt6uc26oeyvjmrmb4drhgodautbhca7bf4vbvsraycp2",
+    "https://www.imdb.com/title/tt1840309/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjmryrxrm6az73endt6xnapcp2udcoq366ssyoa2frnbicv4k46rnvtvazgelvcjvuhlbdmsonvy",
+     "https://www.imdb.com/title/tt1840309/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjmrwqlr4qajy3umd77hfaddp4w3hoq366ssyoeyvvpzldj4k5i75gcbzd2eirsbhk6vkupq57wq"
+)
+
+all_reviews7 <- lapply(divergent_url_list, scrape_reviews7) 
+divergent_reviews <- do.call(rbind, all_reviews7) 
+View(divergent_reviews)
+
+
+
+
+#8. Inside Out
+
+session8 <- bow(url ='https://www.imdb.com/title/tt2096673/reviews?ref_=tt_urv', user_agent = "Student's Demo Educational")
+
+session8
+
+session_scrape8 <- scrape(session8) 
+
+scrape_reviews8 <- function(page_url) { 
+  
+  page <- read_html(page_url) 
+  names <- page %>% html_nodes(".display-name-link") %>% html_text() 
+  dates <- page %>% html_nodes("span.review-date") %>% html_text() 
+  rating <- page %>% html_nodes("span.rating-other-user-rating") %>% html_text() 
+  title_review <- page %>% html_nodes("a.title") %>% html_text() 
+  reviews <- page %>% html_nodes(".text.show-more__control") %>% html_text()
+  
+  InsideOut_review_df = data.frame( 
+    Movie = 'Inside Out',
+    Name = names[1:25], 
+    Date = dates[1:25], 
+    Rating = rating[1:25], 
+    Title_Review = title_review[1:25], 
+    Reviews = reviews[1:25] ) } 
+
+InsideOut_url_list <- c("https://www.imdb.com/title/tt2096673/reviews?ref_=tt_urv",
+"https://www.imdb.com/title/tt3915174/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjnbsrdu44ajs2imt37xnalc6mqbdf4tkscczoyyfzjchfaeff6kvzqtz2mz6su6fj4uvhu",
+"https://www.imdb.com/title/tt3915174/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjnjzrht46bz234od74hpb3e7ewt5pjt6udsyou2flmjkb4drs3ynx6fvnqh4mmqeftxug6tcs",
+"https://www.imdb.com/title/tt3915174/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjnjxr3q42aj73yodb67jald7qwt5pjt6udszo43v3mzcb4dqq6ihrabrhs3ir7n62f7ig44am",
+"https://www.imdb.com/title/tt3915174/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjnjvrdu4ybzs2mkdz6pia3bpwv35pjt6udszoy3fxmjob4dy5yt7hl4ajd6455faeokiurtkg",
+"https://www.imdb.com/title/tt3915174/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjnjtrxumqaj33imdx77mapc7gvt5pjt6udsyouyvrmjnb4dqjmsh7zwwimyt2lzqvgabdnrgo",
+"https://www.imdb.com/title/tt3915174/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjnjqrpsm6ar63intx67ia3d7yvtgoq366ssyoqyfxmzndb4k4qjqg2srpqqwcdiu7wjcphjjora",
+"https://www.imdb.com/title/tt3915174/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjnjrrlr4mary3umdb4ppadb76vlcoq366ssyoi3vxnzndj4k4w64yjnqbn342wpqqw7p7ai7d6a",
+"https://www.imdb.com/title/tt3915174/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjmrzrtu4scj23uotd6poatd72uteoq366ssyom4fxmrpdv4k5geifoo7mmgoloynu7mfs3xpq4y",
+"https://www.imdb.com/title/tt3915174/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjmrwrhs4qab72mmdd6piapb74ul5pjt6udszou4flprlb4dyram565wfb3rli6ohhtjalvq6k",
+"https://www.imdb.com/title/tt3915174/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjmrxrlum6ab63ukt377pahc7suleoq366ssyomzflnbndn4k45jmjkwbi73ucz2b4dui3vo6xwa",
+"https://www.imdb.com/title/tt3915174/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjmrur3q4sbb734od77xpald7gudhoq366ss7oq4vvnbndj4k4lyoyjfwe6aapxzcxnlkev5qjwq"
+
+  )
+
+all_reviews8 <- lapply(InsideOut_url_list, scrape_reviews8) 
+InsideOut_reviews <- do.call(rbind, all_reviews8) 
+View(InsideOut_reviews)
+
+
+#9. Wonka
+
+session9 <- bow(url ="https://www.imdb.com/title/tt6166392/reviews?ref_=tt_urv", user_agent = "Student's Demo Educational")
+
+session9
+
+session_scrape9 <- scrape(session9) 
+
+scrape_reviews9 <- function(page_url) { 
+  
+  page <- read_html(page_url) 
+  names <- page %>% html_nodes(".display-name-link") %>% html_text() 
+  dates <- page %>% html_nodes("span.review-date") %>% html_text() 
+  rating <- page %>% html_nodes("span.rating-other-user-rating") %>% html_text() 
+  title_review <- page %>% html_nodes("a.title") %>% html_text() 
+  reviews <- page %>% html_nodes(".text.show-more__control") %>% html_text()
+  
+  wonka_review_df = data.frame( 
+    Movie = 'Wonka (2023)',
+    Name = names[1:25], 
+    Date = dates[1:25], 
+    Rating = rating[1:25], 
+    Title_Review = title_review[1:25], 
+    Reviews = reviews[1:25] ) } 
+
+wonka_url_list <- c( "https://www.imdb.com/title/tt6166392/reviews?ref_=tt_urv",
+"https://www.imdb.com/title/tt3915174/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjnrqqlrm6azz3uod77pfaxapuu35pjt6ubc6o44ftmjcb4dxs4y6gniqkieo2eypcyzhmjeuo",
+"https://www.imdb.com/title/tt3915174/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjnbzr3r46cj434otd77na7apwvl5pjt6ubc7pezf7nzib4dwsoxueam3nuhgzhv6iyp2onrp6",
+"https://www.imdb.com/title/tt3915174/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjnbqqpq42bbs2intx4peatap6vl5pjt6ubc7pa3v5mjob4dxtbjcbmlzbf4pbnfbvtlloejyk",
+"https://www.imdb.com/title/tt3915174/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjnjzrhq4oar23qktd7xob7bp4wt5pjt6ubc6oqyfzmjob4drglxh4gaqu375yyc2jwwvpmheq",
+"https://www.imdb.com/title/tt3915174/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjnjtrdtm4az53undt6xfadb7yutgoq366sssou3v5mjocv4k5l3thpeaj25rdmyt34bltaqtmri",
+"https://www.imdb.com/title/tt3915174/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjmrzqls44ars3mpd367mala7uwt5pjt6ubc6oa2flprcb4dzwtsvadxit7qgivamzqwqirota",
+"https://www.imdb.com/title/tt3915174/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjmrxrdqmycbz3mptv7xfa7cpqu35pjt6ubc6oq2vxnjdb4d2rstdwsda4t5lrloneeg2zk4gm",
+"https://www.imdb.com/title/tt3915174/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjmrsrptmucb73yndz67paha7guteoq366sssou4v3prldf4k5c4eg6xn3oe4iu42cdfjqnsu4ha",
+"https://www.imdb.com/title/tt3915174/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjmzyrdr46br43iot37hpadcpqvd5pjt6ubc6oayvjmjmb4ds4pd2cm6nhbsoyspwrnjf4s5q4",
+"https://www.imdb.com/title/tt3915174/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjmzwrltmqcbt3iod76heb3d72ud5pjt6ubc6oiyf7mjjb4d4knricwzs44dlkf3rw6xaia7yy",
+"https://www.imdb.com/title/tt3915174/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjmzurhu4obzy3ukd777iaxbpewthoq366sssou3vjmjodb4k4n3qozdrroq4q4gtmda6smnu7xi"
+  )
+
+all_reviews9 <- lapply(wonka_url_list, scrape_reviews9) 
+wonka_reviews <- do.call(rbind, all_reviews9) 
+View(wonka_reviews)
+
+
+#10. Cinderella
+
+session10 <- bow(url = "https://www.imdb.com/title/tt1661199/reviews?ref_=tt_urv", user_agent = "Student's Demo Educational")
+
+session10
+
+session_scrape10 <- scrape(session10) 
+
+scrape_reviews10 <- function(page_url) { 
+  
+  page <- read_html(page_url) 
+  names <- page %>% html_nodes(".display-name-link") %>% html_text() 
+  dates <- page %>% html_nodes("span.review-date") %>% html_text() 
+  rating <- page %>% html_nodes("span.rating-other-user-rating") %>% html_text() 
+  title_review <- page %>% html_nodes("a.title") %>% html_text() 
+  reviews <- page %>% html_nodes(".text.show-more__control") %>% html_text()
+  
+  cinderella_review_df = data.frame( 
+    Movie = 'Wonka (2023)',
+    Name = names[1:25], 
+    Date = dates[1:25], 
+    Rating = rating[1:25], 
+    Title_Review = title_review[1:25], 
+    Reviews = reviews[1:25] ) } 
+
+cinderella_url_list <- c("https://www.imdb.com/title/tt1661199/reviews?ref_=tt_urv",
+"https://www.imdb.com/title/tt1661199/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjnzyrdu4sbzz3ikd74pnaxdp2v35pjt6ucs4pazvxmrpb4d6jgbnllcmraejbvmubqu5vkjja",
+"https://www.imdb.com/title/tt1661199/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjnzvrpq4ybr33qntz6hpaxc7uw35pjt6ucc6o4yfzprnb4dyk6apkbstbsspe42uj3vvtgelo",
+"https://www.imdb.com/title/tt1661199/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjnbuqlsmqbb23ikdb4pkadb7gwt5pjt6uc26pe2vtnrlb4drjivenc7gbqr6gcfnkeuubtyjs",
+"https://www.imdb.com/title/tt1661199/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjnjyr7qmucj43apdt6xealc7qu35pjt6ucs4o43vvmrjb4d3ocgz7cuq7bbj5xnkydaxttmn2",
+"https://www.imdb.com/title/tt1661199/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjnjuqpu4qcbs3end77xeadap2wt5pjt6udszoa3fvnrdb4d3blyemaxfyeuwjqbr7b2ffq4yi",
+"https://www.imdb.com/title/tt1661199/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjnjtrtq4qbr72indt7xfahcpgvlhoq366ssyomzvlnrkdf4k557jotce2eorqeicuxhlnv4cfci",
+"https://www.imdb.com/title/tt1661199/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjnjrrhtmybz73mktv6pfatapuvtcoq366ss6oe4vlprldf4k5tdd7cjb7k2kjkyz232cm4o4pya",
+"https://www.imdb.com/title/tt1661199/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjmrwrxqmybzs3mkt74hfb7apww35pjt6uck7oe4frprob4d45inwsn5mvvvhrmkbadfzle54a",
+"https://www.imdb.com/title/tt1661199/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjmrur3q44bb43mnt37healdpgu3goq366ssyoiyvlnbjdv4k5jus6kt5hwdc2knzz563upk6qeq",
+"https://www.imdb.com/title/tt1661199/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjmrwrxqmybzs3mkt74hfb7apww35pjt6uck7oe4frprob4d45inwsn5mvvvhrmkbadfzle54a",
+"https://www.imdb.com/title/tt1661199/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjmrsrpt4wcj43modv7xfahd7sud5pjt6udsypa4vzmzmb4d6ivanw7hhvo2tburndql4nra7a",
+"https://www.imdb.com/title/tt1661199/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjmrrqpsm6ab63akt36hka7a76u35pjt6uckspazvzmjnb4dz56vtf2hjgivc3th3uo5l3ag5m",
+"https://www.imdb.com/title/tt1661199/reviews/_ajax?&paginationKey=g4w6ddbmqyzdo6ic4oxwjmzyrdqmubb53qpdt7xpaha7svlgoq366ssyoi2v5njkdj4k5zbyhrw2syhyya3lypmw6vkbdwa"
+
+  )
+
+all_reviews10 <- lapply(cinderella_url_list, scrape_reviews10) 
+cinderella_reviews <- do.call(rbind, all_reviews10) 
+View(cinderella_reviews)
+
+movie_reviews_300 <- rbind(pussnboots_reviews, saltburn_reviews, phantomthread_reviews, themeg_reviews, smith_reviews, divergent_reviews, InsideOut_reviews, wonka_reviews,cinderella_reviews, maleficent_reviews)
+
+View(movie_reviews_300)
+
+
